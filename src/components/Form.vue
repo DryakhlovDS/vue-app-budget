@@ -37,22 +37,31 @@
 <script>
 export default {
   name: 'Form',
-  data: () => ({
-    header: 'Add a new record',
-    formData: {
-      type: 'Income',
-      comment: '',
-      cash: 0,
-    },
-    rules: {
-      cash: [
-        { required: true, message: 'cash is required' },
-        { type: 'number', message: 'cash must be a number' },
-      ],
-      type: [{ required: true, message: 'choose type' }],
-      comment: [{ required: true, message: 'Please, add comment', trigger: 'blur' }],
-    },
-  }),
+  data() {
+    function checkValue(rule, value, callback) {
+      if (value < 1) {
+        return callback(new Error('Please input a number greater then 0'));
+      }
+      return callback();
+    }
+    return {
+      header: 'Add a new record',
+      formData: {
+        type: 'Income',
+        comment: '',
+        cash: 0,
+      },
+      rules: {
+        cash: [
+          { required: true, message: 'cash is required' },
+          { type: 'number', message: 'cash must be a number' },
+          { validator: checkValue, trigger: 'change' },
+        ],
+        type: [{ required: true, message: 'choose type' }],
+        comment: [{ required: true, message: 'Please, add comment', trigger: 'blur' }],
+      },
+    };
+  },
   methods: {
     submitForm(formName) {
       this.$refs.addItem.validate((valid) => {

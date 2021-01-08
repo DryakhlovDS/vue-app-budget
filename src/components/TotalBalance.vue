@@ -12,9 +12,6 @@ export default {
       default: 0,
     },
   },
-  data: () => ({
-    someClass: 'some-class',
-  }),
   computed: {
     classObject() {
       return {
