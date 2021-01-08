@@ -2,11 +2,10 @@
   <div class="budget-list-wrap">
     <el-card :header="header"  class="box-card">
       <template v-if="!isEmpty">
-        <div class="list-item" v-for="(item, props) in list" :key="props">
-          <span class="budget-comment">{{item.comment}}</span>
-          <span class="budget-value">{{item.value}}</span>
-          <el-button type="danger" size="mini" plain @click="deleteItem(item.id)">Delete</el-button>
-        </div>
+        <BudgetListItem  v-for="(item, props) in list"
+          :key="props"
+          :item="item"
+          @deleteItem="deleteItem" />
       </template>
         <el-alert
           v-else
@@ -21,8 +20,13 @@
 </template>
 
 <script>
+import BudgetListItem from './BudgetListItem.vue';
+
 export default {
   name: 'BudgetList',
+  components: {
+    BudgetListItem,
+  },
   props: {
     list: {
       type: Object,
@@ -52,18 +56,6 @@ export default {
   max-width: 500px;
   margin: auto;
   text-align: center;
-}
-
-.list-item{
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.budget-value{
-  margin-left: auto;
-  margin-right: 1rem;
-  font-weight: bold;
 }
 
 </style>

@@ -1,5 +1,6 @@
 <template>
-  <div class="total-value">Total balance : {{total}}</div>
+  <div class="total-value" :class="classObject" @click="onConsole">
+    Total balance : {{total}}</div>
 </template>
 
 <script>
@@ -9,6 +10,22 @@ export default {
     total: {
       type: Number,
       default: 0,
+    },
+  },
+  data: () => ({
+    someClass: 'some-class',
+  }),
+  computed: {
+    classObject() {
+      return {
+        'bad-balance': this.total < 0,
+        'good-balance': this.total > 0,
+      };
+    },
+  },
+  methods: {
+    onConsole() {
+      console.log(this.isBadBalance, this.classObject);
     },
   },
 };
@@ -22,5 +39,13 @@ export default {
   max-width: 500px;
   font-size: 26px;
   text-align: right;
+}
+
+.bad-balance{
+  color: brown;
+}
+
+.good-balance{
+  color: #29a10b;
 }
 </style>
