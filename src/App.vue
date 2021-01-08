@@ -34,7 +34,7 @@ export default {
         id: 1,
       },
       2: {
-        type: 'Income',
+        type: 'Outcome',
         cash: -75,
         comment: 'Income comment',
         id: 2,
