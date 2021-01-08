@@ -8,6 +8,7 @@ import {
   FormItem,
   Icon,
   Input,
+  Link,
   Option,
   Select,
 } from 'element-ui';
@@ -17,6 +18,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 locale.use(lang);
 
-const elements = [Button, Card, Alert, Form, FormItem, Select, Input, Option, Dialog, Icon];
+const elements = [Button, Card, Alert, Form, FormItem, Select, Input, Option, Dialog, Icon, Link];
 
 elements.forEach((el) => Vue.component(el.name, el));

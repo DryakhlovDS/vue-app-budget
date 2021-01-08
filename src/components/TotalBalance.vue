@@ -1,6 +1,7 @@
 <template>
-  <div class="total-value" :class="classObject" @click="onConsole">
-    Total balance : {{total}}</div>
+  <div class="total-value" :class="classObject">
+    Total balance : {{total}}
+  </div>
 </template>
 
 <script>
@@ -18,11 +19,6 @@ export default {
         'bad-balance': this.total < 0,
         'good-balance': this.total > 0,
       };
-    },
-  },
-  methods: {
-    onConsole() {
-      console.log(this.isBadBalance, this.classObject);
     },
   },
 };

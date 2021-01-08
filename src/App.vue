@@ -2,7 +2,7 @@
   <div id="App">
     <Form @submitForm="addItemList"/>
     <TotalBalance :total="totalBalance" />
-    <BudgetList :list="list" @deleteItem="dialog" />
+    <BudgetList :list="listSort" @deleteItem="dialog" @sortList="setSortType"/>
     <ModalDialog v-if="centerDialogVisible"
       @confirmDelete="onDeleteElement"
       @closeDialog="closeDialog"
@@ -49,13 +49,23 @@ export default {
     centerDialogVisible: false,
     dialogText: '',
     dialogId: 0,
+    sortType: 'All',
   }),
   computed: {
     totalBalance() {
       return Object.values(this.list).reduce((acc, item) => acc + item.cash, 0);
     },
+    listSort() {
+      if (this.sortType === 'All') {
+        return Object.values(this.list);
+      }
+      return Object.values(this.list).filter((item) => item.type === this.sortType);
+    },
   },
   methods: {
+    setSortType(value) {
+      this.sortType = value;
+    },
     dialog(id) {
       this.dialogText = this.list[id].comment;
       this.dialogId = id;
@@ -88,12 +98,13 @@ export default {
   box-sizing: border-box;
 }
 
-#app {
+#App {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  font-size: 16px;
 }
 </style>
