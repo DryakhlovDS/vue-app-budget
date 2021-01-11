@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'Form',
   data() {
@@ -62,11 +64,15 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters('budget', ['budgetLastId']),
+  },
   methods: {
+    ...mapActions('budget', ['addItemList']),
     submitForm(formName) {
       this.$refs.addItem.validate((valid) => {
         if (valid) {
-          this.$emit('submitForm', { ...this.formData });
+          this.addItemList({ ...this.formData, lastId: this.budgetLastId });
           this.resetForm(formName);
         }
       });

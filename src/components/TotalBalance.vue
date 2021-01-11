@@ -5,15 +5,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'TotalBalance',
-  props: {
-    total: {
-      type: Number,
-      default: 0,
-    },
-  },
   computed: {
+    ...mapGetters('budget', ['budgetListArr']),
+    total() {
+      return this.budgetListArr.reduce((acc, item) => acc + item.cash, 0);
+    },
     classObject() {
       return {
         'bad-balance': this.total < 0,

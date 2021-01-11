@@ -4,13 +4,18 @@
     <i v-else class="el-icon-top" :class="colorText"></i>
     <span class="budget-comment">{{item.comment}}</span>
     <span class="budget-value" :class="colorText">{{item.cash}}</span>
-    <el-button type="danger" size="mini" plain @click="deleteItem(item.id)">
+    <el-button type="danger" size="mini" plain @click="openDialog({
+      text: item.comment,
+      id: item.id
+     })">
       Delete
     </el-button>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'BudgetListItem',
   props: {
@@ -26,11 +31,10 @@ export default {
         red: this.item.type === 'Outcome',
       };
     },
+    // ...mapActions('dialog',),
   },
   methods: {
-    deleteItem(id) {
-      this.$emit('deleteItem', id);
-    },
+    ...mapActions('dialog', ['openDialog']),
   },
 };
 </script>
