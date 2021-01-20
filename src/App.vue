@@ -9,7 +9,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import BudgetList from './components/BudgetList.vue';
+import BudgetList from '@/components/BudgetList.vue';
 import TotalBalance from './components/TotalBalance.vue';
 import Form from './components/Form.vue';
 import ModalDialog from './components/ModalDialog.vue';
