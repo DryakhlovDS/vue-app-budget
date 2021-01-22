@@ -49,7 +49,7 @@ export default {
     return {
       header: 'Add a new record',
       formData: {
-        type: 'Income',
+        type: 'Please select type',
         comment: '',
         cash: 0,
       },

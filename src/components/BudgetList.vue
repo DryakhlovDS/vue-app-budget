@@ -1,6 +1,6 @@
 <template>
   <div class="budget-list-wrap">
-    <el-card :header="header" class="box-card">
+    <el-card :header="header" class="box-card mx-auto">
       <div class="list-control">
         <a href="#" class="link-active" :class="classLink" @click.prevent="sortList('All', $event)">
           Show all
@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style scoped>
-.el-card {
+.mx-auto {
   max-width: 500px;
   margin: auto;
   text-align: center;
