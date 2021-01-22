@@ -1,5 +1,5 @@
 <template>
-  <el-card :header="header"  class="box-card">
+  <el-card :header="header"  class="box-card mx-auto">
     <el-form :model="formData"
      :rules="rules"
      ref="addItem"
@@ -85,7 +85,7 @@ export default {
 </script>
 
 <style scoped>
-.el-card{
+.mx-auto{
   margin: auto;
   max-width: 500px;
   text-align: left;
