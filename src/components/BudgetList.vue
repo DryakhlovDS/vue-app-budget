@@ -1,17 +1,7 @@
 <template>
   <div class="budget-list-wrap">
     <el-card :header="header" class="box-card mx-auto">
-      <div class="list-control">
-        <a href="#" class="link-active" :class="classLink" @click.prevent="sortList('All', $event)">
-          Show all
-        </a>
-        <a href="#" :class="classLink" @click.prevent="sortList('Income', $event)">
-          Show income
-        </a>
-        <a href="#" :class="classLink" @click.prevent="sortList('Outcome', $event)">
-          Show outcome
-        </a>
-      </div>
+      <ListControl @sort="setSortType" />
       <template v-if="!isEmpty">
         <BudgetListItem
           v-for="(item, props) in list"
@@ -28,16 +18,17 @@
 <script>
 import { mapGetters } from 'vuex';
 import BudgetListItem from './BudgetListItem.vue';
+import ListControl from './ListControl.vue';
 
 export default {
   name: 'BudgetList',
   components: {
     BudgetListItem,
+    ListControl,
   },
   data: () => ({
     header: 'Budget List',
     emptyTitle: 'Empty list',
-    classLink: ['el-link', 'el-link--default', 'is-underline'],
     sortType: 'All',
   }),
   computed: {
@@ -53,12 +44,7 @@ export default {
     },
   },
   methods: {
-    sortList(value, event) {
-      const links = document.querySelectorAll('.el-link');
-      links.forEach((link) => link.classList.remove('link-active'));
-      event.target.classList.add('link-active');
-      this.setSortType(value);
-    },
+
     setSortType(value) {
       this.sortType = value;
     },
@@ -73,25 +59,4 @@ export default {
   text-align: center;
 }
 
-.list-control {
-  display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  line-height: 1.4rem;
-}
-
-.link-active::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 0;
-  border-bottom: 1px solid #606266 !important;
-}
-
-.link-active:hover::after {
-  border-bottom: 1px solid #409eff !important;
-}
 </style>
